@@ -1,6 +1,6 @@
-# goal of this repo
+# Comparing paradigms
 
-show the differences between oo and fp paradigms in the implementation of the rubiks cube
+This repo aims to show the differences between oo and fp paradigms in the implementation of a rubiks cube solver.
 
 First comparison between oo and fp in javascript.
 
