@@ -34,68 +34,68 @@
 ([[4 4 4] [4 4 4] [4 4 4]] 0)
 
 (defn R [cube]
-	(let [cube1 (assoc-in cube [:front 0 2] (get-in cube [:bottom 0 2]))
-		  cube2 (assoc-in cube1 [:front 1 2] (get-in cube [:bottom 1 2]))
-		  cube3 (assoc-in cube2 [:front 2 2] (get-in cube [:bottom 2 2]))
+	(-> cube
+		(assoc-in [:front 0 2] (get-in cube [:bottom 0 2]))
+	    (assoc-in [:front 1 2] (get-in cube [:bottom 1 2]))
+	    (assoc-in [:front 2 2] (get-in cube [:bottom 2 2]))
 
-		  cube4 (assoc-in cube3 [:top 0 2] (get-in cube [:front 0 2]))
-		  cube5 (assoc-in cube4 [:top 1 2] (get-in cube [:front 1 2]))
-		  cube6 (assoc-in cube5 [:top 2 2] (get-in cube [:front 2 2]))
+	    (assoc-in [:top 0 2] (get-in cube [:front 0 2]))
+	    (assoc-in [:top 1 2] (get-in cube [:front 1 2]))
+	    (assoc-in [:top 2 2] (get-in cube [:front 2 2]))
 
-  		  cube7 (assoc-in cube6 [:back 0 2] (get-in cube [:top 0 2]))
-		  cube8 (assoc-in cube7 [:back 1 2] (get-in cube [:top 1 2]))
-		  cube9 (assoc-in cube8 [:back 2 2] (get-in cube [:top 2 2]))
+	    (assoc-in [:back 0 2] (get-in cube [:top 0 2]))
+	    (assoc-in [:back 1 2] (get-in cube [:top 1 2]))
+	    (assoc-in [:back 2 2] (get-in cube [:top 2 2]))
 
-		  cube10 (assoc-in cube9 [:bottom 0 2] (get-in cube [:back 0 2]))
-		  cube11 (assoc-in cube10 [:bottom 1 2] (get-in cube [:back 1 2]))
-		  cube12 (assoc-in cube11 [:bottom 2 2] (get-in cube [:back 2 2]))
-		 ]
-		cube12))
+	    (assoc-in [:bottom 0 2] (get-in cube [:back 0 2]))
+	    (assoc-in [:bottom 1 2] (get-in cube [:back 1 2]))
+	    (assoc-in [:bottom 2 2] (get-in cube [:back 2 2]))))
 
 (defn R1 [cube]
 	(R (R (R cube))))
 
 
 (defn L [cube]
-	(let [cube1 (assoc-in cube [:front 0 0] (get-in cube [:top 0 0]))
-		  cube2 (assoc-in cube1 [:front 1 0] (get-in cube [:top 1 0]))
-		  cube3 (assoc-in cube2 [:front 2 0] (get-in cube [:top 2 0]))
+	(-> cube
+       	(assoc-in [:front 0 0] (get-in cube [:top 0 0]))
+	    (assoc-in [:front 1 0] (get-in cube [:top 1 0]))
+	    (assoc-in [:front 2 0] (get-in cube [:top 2 0]))
 
-		  cube4 (assoc-in cube3 [:top 0 0] (get-in cube [:back 0 0]))
-		  cube5 (assoc-in cube4 [:top 1 0] (get-in cube [:back 1 0]))
-		  cube6 (assoc-in cube5 [:top 2 0] (get-in cube [:back 2 0]))
+	    (assoc-in [:top 0 0] (get-in cube [:back 0 0]))
+	    (assoc-in [:top 1 0] (get-in cube [:back 1 0]))
+	    (assoc-in [:top 2 0] (get-in cube [:back 2 0]))
 
-  		  cube7 (assoc-in cube6 [:back 0 0] (get-in cube [:bottom 0 0]))
-		  cube8 (assoc-in cube7 [:back 1 0] (get-in cube [:bottom 1 0]))
-		  cube9 (assoc-in cube8 [:back 2 0] (get-in cube [:bottom 2 0]))
-		
-		  cube10 (assoc-in cube9 [:bottom 0 0] (get-in cube [:front 0 0]))
-		  cube11 (assoc-in cube10 [:bottom 1 0] (get-in cube [:front 1 0]))
-		  cube12 (assoc-in cube11 [:bottom 2 0] (get-in cube [:front 2 0]))
-		 ]
-		cube12))
+	    (assoc-in [:back 0 0] (get-in cube [:bottom 0 0]))
+	    (assoc-in [:back 1 0] (get-in cube [:bottom 1 0]))
+	    (assoc-in [:back 2 0] (get-in cube [:bottom 2 0]))
+	
+	    (assoc-in [:bottom 0 0] (get-in cube [:front 0 0]))
+	    (assoc-in [:bottom 1 0] (get-in cube [:front 1 0]))
+	    (assoc-in [:bottom 2 0] (get-in cube [:front 2 0]))))
 
 (defn L1 [cube]
 	(L (L (L cube))))
 
+
 (defn U [cube]
-	(let [cube1 (assoc-in cube [:front 0 0] (get-in cube [:right 0 0]))
-		  cube2 (assoc-in cube1 [:front 0 1] (get-in cube [:right 0 1]))
-		  cube3 (assoc-in cube2 [:front 0 2] (get-in cube [:right 0 2]))
+	(-> cube
+		(assoc-in [:front 0 0] (get-in cube [:right 0 0]))
+		(assoc-in [:front 0 1] (get-in cube [:right 0 1]))
+		(assoc-in [:front 0 2] (get-in cube [:right 0 2]))
 
-		  cube4 (assoc-in cube3 [:left 0 0] (get-in cube [:front 0 0]))
-		  cube5 (assoc-in cube4 [:left 0 1] (get-in cube [:front 0 1]))
-		  cube6 (assoc-in cube5 [:left 0 2] (get-in cube [:front 0 2]))
+		(assoc-in [:left 0 0] (get-in cube [:front 0 0]))
+		(assoc-in [:left 0 1] (get-in cube [:front 0 1]))
+		(assoc-in [:left 0 2] (get-in cube [:front 0 2]))
 
-		  cube7 (assoc-in cube6 [:back 0 0] (get-in cube [:left 0 0]))
-		  cube8 (assoc-in cube7 [:back 0 1] (get-in cube [:left 0 1]))
-		  cube9 (assoc-in cube8 [:back 0 2] (get-in cube [:left 0 2]))
+		(assoc-in [:back 0 0] (get-in cube [:left 0 0]))
+		(assoc-in [:back 0 1] (get-in cube [:left 0 1]))
+		(assoc-in [:back 0 2] (get-in cube [:left 0 2]))
 
-		  cube10 (assoc-in cube9 [:right 0 0] (get-in cube [:back 0 0]))
-		  cube11 (assoc-in cube10 [:right 0 1] (get-in cube [:back 0 1]))
-		  cube12 (assoc-in cube11 [:right 0 2] (get-in cube [:back 0 2]))
-		 ]
-		cube12))
+		(assoc-in [:right 0 0] (get-in cube [:back 0 0]))
+		(assoc-in [:right 0 1] (get-in cube [:back 0 1]))
+		(assoc-in [:right 0 2] (get-in cube [:back 0 2]))))
+
+
 
 (defn U1 [cube]
 	(U (U (U cube))))
