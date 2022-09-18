@@ -194,8 +194,8 @@
  :back   [[3 3 3] [3 3 3] [3 3 3]]
 })
 
-; (println
-; 	(json/write-str cube))
+(println
+	(json/write-str cube))
 
 
 (R cube)
@@ -227,7 +227,7 @@
 ((M1 cube) :front)
 
 ; front face get multicolor 1 2 3 4 5 6 7 8 9
-(def cube
+(def front-face-multicolor-cube
 {:left   [[4 4 4] [4 4 4] [4 4 4]]
  :right  [[2 2 2] [2 2 2] [2 2 2]]
  :bottom [[6 6 6] [6 6 6] [6 6 6]]
@@ -236,13 +236,28 @@
  :back   [[3 3 3] [3 3 3] [3 3 3]]
 })
 
-((F1 cube) :front)
+((F1 front-face-multicolor-cube) :front)
 ; should be [[3 6 9] [2 5 8] [1 4 7]]
 (assert
-	(= ((F1 cube) :front) [[3 6 9] [2 5 8] [1 4 7]]))
+	(= ((F1 front-face-multicolor-cube) :front) [[3 6 9] [2 5 8] [1 4 7]]))
 
 cube
 
+(def moves
+	"RRU")
+
+parser
+(defn modified-cube [moves])
+
+(defn to-json [cube]
+	(let [model-str (json/write-str cube)
+				data-str (str "data = '" model-str "'")]
+		(spit "model.json" data-str)))
+
+(to-json (-> cube
+						U
+						))
+; bugs to solve on moves
 
 ; maybe a transducer version
 
