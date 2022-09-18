@@ -1,5 +1,5 @@
-(ns main)
-
+(ns main
+	(:require [clojure.data.json :as json]))
 ; let cube = new Cube(
 ; 	{left: [[4,4,4],[4,4,4],[4,4,4]],
 ; 	 right: [[2,2,2],[2,2,2],[2,2,2]],
@@ -193,6 +193,10 @@
  :front  [[1 1 1] [1 1 1] [1 1 1]]
  :back   [[3 3 3] [3 3 3] [3 3 3]]
 })
+
+; (println
+; 	(json/write-str cube))
+
 
 (R cube)
 ((R cube) :front)

@@ -1,0 +1,3 @@
+*
+(clojure.data.json/write-str {:a "a"})
+exit
