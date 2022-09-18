@@ -131,7 +131,6 @@
 		))
 
 
-
 (defn U1 [cube]
 	(U (U (U cube))))
 		
@@ -159,6 +158,31 @@
 
 (defn F [cube]
 	(F1 (F1 (F1 cube))))
+
+
+(defn M [cube]
+	(-> cube
+		(assoc-in [:front 0 1] (get-in cube [:top 0 1]))
+		(assoc-in [:front 1 1] (get-in cube [:top 1 1]))
+		(assoc-in [:front 2 1] (get-in cube [:top 2 1]))
+
+		(assoc-in [:top 0 1] (get-in cube [:back 0 1]))
+		(assoc-in [:top 1 1] (get-in cube [:back 1 1]))
+		(assoc-in [:top 2 1] (get-in cube [:back 2 1]))
+
+		(assoc-in [:back 0 1] (get-in cube [:bottom 0 1]))
+		(assoc-in [:back 1 1] (get-in cube [:bottom 1 1]))
+		(assoc-in [:back 2 1] (get-in cube [:bottom 2 1]))
+
+		(assoc-in [:bottom 0 1] (get-in cube [:front 0 1]))
+		(assoc-in [:bottom 1 1] (get-in cube [:front 1 1]))
+		(assoc-in [:bottom 2 1] (get-in cube [:front 2 1]))
+		))
+
+
+
+(defn M1 [cube]
+	(M (M (M cube))))
 
 
 (def cube
@@ -192,6 +216,11 @@
 
 ((F cube) :top)
 ((F (F cube)) :top)
+
+(M cube)
+((M cube) :front)
+((M (M cube)) :front)
+((M1 cube) :front)
 
 ; front face get multicolor 1 2 3 4 5 6 7 8 9
 (def cube
