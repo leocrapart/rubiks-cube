@@ -258,6 +258,7 @@ parser
 						U
 						))
 ; bugs to solve on moves
+; turn display into a reframe app
 
 ; maybe a transducer version
 
