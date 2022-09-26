@@ -243,14 +243,9 @@
 
 cube
 
-(defn call [this & that]
-  (apply (resolve (symbol this)) that))
-
 (def moves
 	"RRU")
 
-(defn call [this & that]
-  (apply (resolve (symbol this)) that))
 
 (clojure.string/split "RRU'" #"")
 
@@ -288,18 +283,9 @@ cube
 		true
 		false))
 
-"RRU1"
-
-(get "RRU1" 1)
-(get "RRU1" (inc 1))
-
 (defn is-normal-move [char next-char]
 	(not (is-invert-move char next-char)))
 
-(str \R " ")
-
-
-(clojure.string/join "R" " ")
 
 (defn identify-move [moves-str idx char]
 	(let [next-char (get moves-str (inc idx))]
@@ -334,14 +320,40 @@ cube
 ; (vectorize "R R U1")
 
 (defn parse-moves-str [moves-str]
-	(-> moves-str
-		primes->ones
-		identify-moves
-		vectorize))
+	(if (empty? moves-str)
+		[]
+		(-> moves-str
+			primes->ones
+			identify-moves
+			vectorize)))
 
+(parse-moves-str "RRU'")
+(parse-moves-str "R1RU'")
+(parse-moves-str "MM'M'R'U'")
+(parse-moves-str "")
 
-(defn move [cube moves]
-	)
+(defn call [this & that]
+  (apply (resolve (symbol this)) that))
+
+(empty? ["M"])
+
+(first
+	(rest ["M" "M1" "M4"]))
+
+(defn move-cube-vec [cube moves]
+	(if (empty? moves)
+		cube
+		(let [move (first moves)
+					new-cube (call move cube)]
+			(move-cube new-cube (rest moves)))
+		))
+
+(defn move-cube [cube moves-str]
+	(move-cube-vec cube (parse-moves-str moves-str)))
+
+(move-cube cube "RRU")
+(move-cube cube "")
+
 
 (defn modified-cube [moves])
 
