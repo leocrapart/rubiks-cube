@@ -263,10 +263,10 @@ cube
 (first "'")
 
 
-;;process
+;;process parse-string
 ;   "RRU'" ;; moves-str
 ;=> "RRU1"         ;; primes->ones     v
-;=> "R R U1 "      ;; identify moves   
+;=> "R R U1 "      ;; identify moves   v
 ;=> ["R" "R" "U1"] ;; vectorize        v
 ;=> for in call    ;; apply moves      
 
@@ -288,21 +288,56 @@ cube
 		true
 		false))
 
-(defn is-normal-move [char next-char]
-	(not is-invert-move))
+"RRU1"
 
-(is-invert-move \R \R)
+(get "RRU1" 1)
+(get "RRU1" (inc 1))
+
+(defn is-normal-move [char next-char]
+	(not (is-invert-move char next-char)))
+
+(str \R " ")
+
+
+(clojure.string/join "R" " ")
+
+(defn identify-move [moves-str idx char]
+	(let [next-char (get moves-str (inc idx))]
+		(if (is-normal-move char next-char)
+			(str char " ")
+			(str char)
+			))
+	)
+
+; (is-invert-move \R \R)
+; (is-normal-move \R \R)
+; (identify-move "RRU1" 0 \R)
+; (identify-move "RRU1" 1 \R)
+; (identify-move "RRU1" 2 \U)
+; (identify-move "RRU1" 3 \1)
+; (def identify-move-set (partial identify-move "RRU1"))
+; (identify-move-set 0 \R)
+; (identify-move-set 1 \R)
+; (identify-move-set 2 \U)
+; (identify-move-set 3 \1)
+
+(defn identify-moves [moves-str]
+	(let [identify-move-set (partial identify-move moves-str)]
+		(clojure.string/join
+			(map-indexed identify-move-set moves-str))))
+
+; (identify-moves "RRU1")
 
 (defn vectorize [spaced-moves-str]
 	(clojure.string/split spaced-moves-str #" "))
 
 ; (vectorize "R R U1")
 
-(defn parse-string [string]
-	(let [first-char (first string)
-				second-char (second string)])
-	(if (= (second-char) \'
-		)))
+(defn parse-moves-str [moves-str]
+	(-> moves-str
+		primes->ones
+		identify-moves
+		vectorize))
 
 
 (defn move [cube moves]
