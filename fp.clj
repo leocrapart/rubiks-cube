@@ -258,12 +258,12 @@ cube
 (first "'")
 
 
-;;process parse-string
+;;process parse-string                 v
 ;   "RRU'" ;; moves-str
 ;=> "RRU1"         ;; primes->ones     v
 ;=> "R R U1 "      ;; identify moves   v
 ;=> ["R" "R" "U1"] ;; vectorize        v
-;=> for in call    ;; apply moves      
+;=> for in call    ;; apply moves      v
 
 (defn prime->one [char]
 	(if (= char \')
@@ -355,7 +355,6 @@ cube
 (move-cube cube "")
 
 
-(defn modified-cube [moves])
 
 (defn to-json [cube]
 	(let [model-str (json/write-str cube)
@@ -366,27 +365,20 @@ cube
 {:left   [[4 4 4] [4 4 4] [4 4 4]]
  :right  [[2 2 2] [2 2 2] [2 2 2]]
  :bottom [[6 6 6] [6 6 6] [6 6 6]]
- :top    [[1 5 2] [5 5 5] [4 5 3]]
+ :top    [[5 5 5] [5 5 5] [5 5 5]]
  :front  [[1 1 1] [1 1 1] [1 1 1]]
  :back   [[3 3 3] [3 3 3] [3 3 3]]
 })
-(to-json (-> cube
-						U1
-						))
-
-; bugs to solve on moves
-;; comment trouver un bug ?
-;; jouer avec
-;; interface move cube
-;; reframe app
+(to-json (move-cube cube "R'UU"))
 
 
 
-(-> cube
-	U
-	)
 
-
+;; next
+;; playable cube : reframe with moves button and see cube state changed
+;; 3d cube
+;; 3d playable cube
+;; roux-solve
 
 
 ; turn display into a reframe app
