@@ -243,10 +243,71 @@
 
 cube
 
+(defn call [this & that]
+  (apply (resolve (symbol this)) that))
+
 (def moves
 	"RRU")
 
-parser
+(defn call [this & that]
+  (apply (resolve (symbol this)) that))
+
+(clojure.string/split "RRU'" #"")
+
+(call "+" 1 2)
+
+
+(first "RRU'")
+(second "RRU'")
+
+(first "'")
+
+
+;;process
+;   "RRU'" ;; moves-str
+;=> "RRU1"         ;; primes->ones     v
+;=> "R R U1 "      ;; identify moves   
+;=> ["R" "R" "U1"] ;; vectorize        v
+;=> for in call    ;; apply moves      
+
+(defn prime->one [char]
+	(if (= char \')
+		\1
+		char))
+
+;(prime->one \')
+
+(defn primes->ones [moves-str]
+	(clojure.string/join
+	 (map prime->one moves-str)))
+
+;(primes->ones "RRU'")
+
+(defn is-invert-move [char next-char]
+	(if (= next-char \1)
+		true
+		false))
+
+(defn is-normal-move [char next-char]
+	(not is-invert-move))
+
+(is-invert-move \R \R)
+
+(defn vectorize [spaced-moves-str]
+	(clojure.string/split spaced-moves-str #" "))
+
+; (vectorize "R R U1")
+
+(defn parse-string [string]
+	(let [first-char (first string)
+				second-char (second string)])
+	(if (= (second-char) \'
+		)))
+
+
+(defn move [cube moves]
+	)
+
 (defn modified-cube [moves])
 
 (defn to-json [cube]
@@ -254,10 +315,33 @@ parser
 				data-str (str "data = '" model-str "'")]
 		(spit "model.json" data-str)))
 
+(def cube
+{:left   [[4 4 4] [4 4 4] [4 4 4]]
+ :right  [[2 2 2] [2 2 2] [2 2 2]]
+ :bottom [[6 6 6] [6 6 6] [6 6 6]]
+ :top    [[1 5 2] [5 5 5] [4 5 3]]
+ :front  [[1 1 1] [1 1 1] [1 1 1]]
+ :back   [[3 3 3] [3 3 3] [3 3 3]]
+})
 (to-json (-> cube
-						U
+						U1
 						))
+
 ; bugs to solve on moves
+;; comment trouver un bug ?
+;; jouer avec
+;; interface move cube
+;; reframe app
+
+
+
+(-> cube
+	U
+	)
+
+
+
+
 ; turn display into a reframe app
 
 ; maybe a transducer version
@@ -265,3 +349,7 @@ parser
 ; clojure sublimed upgrades
 ; tree result unfolding like atom (or slightly better)
 ; multiexpressions sync evaluation show all results (currently everything sync evaled, but only last printed)
+
+
+
+;;;; find good coding env for clojurescript
