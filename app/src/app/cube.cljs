@@ -1,5 +1,5 @@
 #_{:clj-kondo/ignore [:namespace-name-mismatch]}
-(ns main
+(ns app.cube
   (:require [clojure.data.json :as json]
             clojure.string))
 ; let cube = new Cube(
@@ -335,20 +335,20 @@
 
 
 
-(defn to-json [cube]
-  (let [model-str (json/write-str cube)
-        data-str (str "data = '" model-str "'")]
-    (spit "model.json" data-str)))
+;; (defn to-json [cube]
+;;   (let [model-str (json/write-str cube)
+;;         data-str (str "data = '" model-str "'")]
+;;     (spit "model.json" data-str)))
 
-(def cube
-  {:left   [[4 4 4] [4 4 4] [4 4 4]]
-   :right  [[2 2 2] [2 2 2] [2 2 2]]
-   :bottom [[6 6 6] [6 6 6] [6 6 6]]
-   :top    [[5 5 5] [5 5 5] [5 5 5]]
-   :front  [[1 1 1] [1 1 1] [1 1 1]]
-   :back   [[3 3 3] [3 3 3] [3 3 3]]})
+;; (def cube
+;;   {:left   [[4 4 4] [4 4 4] [4 4 4]]
+;;    :right  [[2 2 2] [2 2 2] [2 2 2]]
+;;    :bottom [[6 6 6] [6 6 6] [6 6 6]]
+;;    :top    [[5 5 5] [5 5 5] [5 5 5]]
+;;    :front  [[1 1 1] [1 1 1] [1 1 1]]
+;;    :back   [[3 3 3] [3 3 3] [3 3 3]]})
 
-(to-json (move-cube cube "R'UU"))
+;; (to-json (move-cube cube "R'UU"))
 
 
 
