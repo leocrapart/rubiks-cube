@@ -295,17 +295,25 @@
 
 ; (vectorize "R R U1")
 
+(defn remove-empties [moves]
+  (vec
+    (filter not-empty moves)))
+
+
+
 (defn parse-moves-str [moves-str]
   (if (empty? moves-str)
     []
     (-> moves-str
         primes->ones
         identify-moves
-        vectorize)))
+        vectorize
+        remove-empties)))
 
 (parse-moves-str "RRU'")
 (parse-moves-str "R1RU'")
 (parse-moves-str "MM'M'R'U'")
+(parse-moves-str "F R U' R' U' R U R' F' R U R' U' R' F R F'")
 (parse-moves-str "")
 
 (defn call [this & that]
@@ -335,6 +343,15 @@
 
 
 
+;;    formulas 
+
+(defn t-perm [cube]
+  (move-cube cube "R U R' U' R' F RR U' R' U' R U R' F'"))
+
+(defn y-perm [cube]
+  (move-cube cube "F R U' R' U' R U R' F' R U R' U' R' F R F'"))
+
+
 (defn to-json [cube]
   (let [model-str (json/write-str cube)
         data-str (str "data = '" model-str "'")]
@@ -348,6 +365,10 @@
    :front  [[1 1 1] [1 1 1] [1 1 1]]
    :back   [[3 3 3] [3 3 3] [3 3 3]]})
 
+
+cube
+(t-perm cube)
+(move-cube cube "R'UU")
 (to-json (move-cube cube "R'UU"))
 
 
