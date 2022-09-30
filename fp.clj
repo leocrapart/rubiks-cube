@@ -342,6 +342,24 @@
   (move-cube cube ""))
 
 
+;; orientate
+; create x y z moves
+
+;; blue-white
+
+; locate blue white edge
+;   <blue>-<white>
+;   8x2 possibles positions left-bottom left-bottom
+; best move for each case
+
+
+(def blue-white-solve 
+{:left-bottom ""
+ :bottom-left "L1L1 U1 F1 L"
+ :left-front "L"
+  })
+(defn solve-blue-white [cube]
+  )
 
 ;;    formulas 
 
