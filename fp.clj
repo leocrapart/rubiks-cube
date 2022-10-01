@@ -198,11 +198,26 @@
   (E (E (E cube))))
 
 (defn S [cube]
-  cube)
+  (-> cube
+    (assoc-in [:top 1 0] (get-in cube [:left 2 1]))
+    (assoc-in [:top 1 1] (get-in cube [:left 1 1]))
+    (assoc-in [:top 1 2] (get-in cube [:left 0 1]))
+
+    (assoc-in [:right 0 1] (get-in cube [:top 1 0]))
+    (assoc-in [:right 1 1] (get-in cube [:top 1 1]))
+    (assoc-in [:right 2 1] (get-in cube [:top 1 2]))
+    
+    (assoc-in [:bottom 1 0] (get-in cube [:right 2 1]))
+    (assoc-in [:bottom 1 1] (get-in cube [:right 1 1]))
+    (assoc-in [:bottom 1 2] (get-in cube [:right 0 1]))
+
+    (assoc-in [:left 0 1] (get-in cube [:bottom 1 0]))
+    (assoc-in [:left 1 1] (get-in cube [:bottom 1 1]))
+    (assoc-in [:left 2 1] (get-in cube [:bottom 1 2]))
+    cube))
 
 (defn S1 [cube]
-  cube)
-
+  (S (S (S cube))))
 
 
 (defn M1 [cube]
