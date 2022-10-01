@@ -205,10 +205,28 @@
   (D (D (D cube))))
 
 (defn B [cube]
+  (-> cube
+    (assoc-in [:top 0 0] (get-in cube [:right 0 2]))
+    (assoc-in [:top 0 1] (get-in cube [:right 1 2]))
+    (assoc-in [:top 0 2] (get-in cube [:right 2 2]))
 
-  )
+    (assoc-in [:left 0 0] (get-in cube [:top 0 2]))
+    (assoc-in [:left 1 0] (get-in cube [:top 0 1]))
+    (assoc-in [:left 2 0] (get-in cube [:top 0 0]))
 
-(defn B1 [cube])
+    (assoc-in [:bottom 2 0] (get-in cube [:left 0 0]))
+    (assoc-in [:bottom 2 1] (get-in cube [:left 1 0]))
+    (assoc-in [:bottom 2 2] (get-in cube [:left 2 0]))
+
+    (assoc-in [:right 0 2] (get-in cube [:bottom 2 2]))
+    (assoc-in [:right 1 2] (get-in cube [:bottom 2 1]))
+    (assoc-in [:right 2 2] (get-in cube [:bottom 2 0]))
+
+    (assoc :back (clockwise-rotated (cube :back)))
+    )
+
+(defn B1 [cube]
+  (B (B (B cube))))
 
 
 (defn E [cube]
