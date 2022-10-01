@@ -175,10 +175,40 @@
       (assoc-in [:bottom 1 1] (get-in cube [:front 1 1]))
       (assoc-in [:bottom 2 1] (get-in cube [:front 2 1]))))
 
+(defn E [cube]
+  cube)
+
+(defn E1 [cube]
+  cube)
+
+(defn S [cube]
+  cube)
+
+(defn S1 [cube]
+  cube)
+
 
 
 (defn M1 [cube]
   (M (M (M cube))))
+
+(defn X [cube]
+  (R (M1 (L1 cube))))
+
+(defn X1 [cube]
+  (R1 (M (L cube))))
+
+(defn Y [cube]
+  (U (E1 (D1 cube))))
+
+(defn Y1 [cube]
+  (U1 (E (D cube))))
+
+(defn Z [cube]
+  (F (S (B1 cube))))
+
+(defn Z1 [cube]
+  (F1 (S1 (B cube))))
 
 
 (def cube
@@ -358,6 +388,7 @@
  :bottom-left "L1L1 U1 F1 L"
  :left-front "L"
   })
+
 (defn solve-blue-white [cube]
   )
 
