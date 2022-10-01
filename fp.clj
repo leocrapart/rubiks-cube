@@ -176,10 +176,26 @@
       (assoc-in [:bottom 2 1] (get-in cube [:front 2 1]))))
 
 (defn E [cube]
-  cube)
+  (-> cube
+    (assoc-in [:left 1 0] (get-in cube [:front 1 0]))
+    (assoc-in [:left 1 1] (get-in cube [:front 1 1]))
+    (assoc-in [:left 1 2] (get-in cube [:front 1 2]))
+
+    (assoc-in [:front 1 0] (get-in cube [:right 1 0]))
+    (assoc-in [:front 1 1] (get-in cube [:right 1 1]))
+    (assoc-in [:front 1 2] (get-in cube [:right 1 2]))
+    
+    (assoc-in [:right 1 0] (get-in cube [:back 1 2]))
+    (assoc-in [:right 1 1] (get-in cube [:back 1 1]))
+    (assoc-in [:right 1 2] (get-in cube [:back 1 0]))
+
+    (assoc-in [:back 1 0] (get-in cube [:left 1 2]))
+    (assoc-in [:back 1 1] (get-in cube [:left 1 1]))
+    (assoc-in [:back 1 2] (get-in cube [:left 1 0]))
+    cube))
 
 (defn E1 [cube]
-  cube)
+  (E (E (E cube))))
 
 (defn S [cube]
   cube)
