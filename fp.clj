@@ -287,69 +287,6 @@
 (defn Z1 [cube]
   (F1 (S1 (B cube))))
 
-(def blue-face-to-left
-  {:left ""
-   :top "Z1"
-   :right "ZZ"
-   :bottom "Z"
-   :front "Y"
-   :back "Y1"    
-    })
-
-(def yellow-face-to-top
-  {:top ""
-   :front "X"
-   :back "X1"
-   :bottom "XX"   
-    })
-
-(defn center [face]
-  (get-in face [1 1]))
-
-; (center [[4 4 4] [4 6 4] [4 4 4]])
-
-(defn centers-of-cube [cube]
-  {:left   (center (cube :left))
-   :right  (center (cube :right))
-   :bottom (center (cube :bottom))
-   :top    (center (cube :top))
-   :front  (center (cube :front))
-   :back   (center (cube :back))})
-
-(def cube
-  {:left   [[4 4 4] [4 4 4] [4 4 4]]
-   :right  [[2 2 2] [2 2 2] [2 2 2]]
-   :bottom [[6 6 6] [6 6 6] [6 6 6]]
-   :top    [[5 5 5] [5 5 5] [5 5 5]]
-   :front  [[1 1 1] [1 1 1] [1 1 1]]
-   :back   [[3 3 3] [3 3 3] [3 3 3]]})
-
-
-(defn locate-blue-face [cube]
-  ((clojure.set/map-invert (centers-of-cube cube)) 4))
-
-(defn locate-yellow-face [cube]
-  ((clojure.set/map-invert (centers-of-cube cube)) 5))
-
-(locate-blue-face cube)
-(locate-yellow-face cube)
-(locate-yellow-face (X cube))
-
-(defn orientate-cube [cube]
-  (let [blue-face-location (locate-blue-face cube)
-        moves-blue (blue-face-to-left blue-face-location)
-        blue-at-left-cube (move-cube cube moves-blue)
-
-        yellow-face-location (locate-yellow-face blue-at-left-cube)
-        moves-yellow (yellow-face-to-top yellow-face-location)
-        orientated-cube (move-cube blue-at-left-cube moves-yellow)
-        ]
-        [(str moves-blue moves-yellow) orientated-cube]
-        )
-  )
-
-(orientate-cube XXZ-cube)
-
 
 (def cube
   {:left   [[4 4 4] [4 4 4] [4 4 4]]
@@ -517,10 +454,78 @@
   (move-cube cube ""))
 
 
-;; orientate
-; create x y z moves
+;;--------- orientate cube ----------------------
+; place blue face at left, and yellow face at top
 
-;; blue-white
+(def blue-face-to-left
+  {:left ""
+   :top "Z1"
+   :right "ZZ"
+   :bottom "Z"
+   :front "Y"
+   :back "Y1"    
+    })
+
+(def yellow-face-to-top
+  {:top ""
+   :front "X"
+   :back "X1"
+   :bottom "XX"   
+    })
+
+(defn center [face]
+  (get-in face [1 1]))
+
+; (center [[4 4 4] [4 6 4] [4 4 4]])
+
+(defn centers-of-cube [cube]
+  {:left   (center (cube :left))
+   :right  (center (cube :right))
+   :bottom (center (cube :bottom))
+   :top    (center (cube :top))
+   :front  (center (cube :front))
+   :back   (center (cube :back))})
+
+(def cube
+  {:left   [[4 4 4] [4 4 4] [4 4 4]]
+   :right  [[2 2 2] [2 2 2] [2 2 2]]
+   :bottom [[6 6 6] [6 6 6] [6 6 6]]
+   :top    [[5 5 5] [5 5 5] [5 5 5]]
+   :front  [[1 1 1] [1 1 1] [1 1 1]]
+   :back   [[3 3 3] [3 3 3] [3 3 3]]})
+
+(def XXZ-cube
+  (move-cube cube "XXZ"))
+
+(defn locate-blue-face [cube]
+  ((clojure.set/map-invert (centers-of-cube cube)) 4))
+
+(defn locate-yellow-face [cube]
+  ((clojure.set/map-invert (centers-of-cube cube)) 5))
+
+(locate-blue-face cube)
+(locate-yellow-face cube)
+(locate-yellow-face (X cube))
+
+(defn orientate-cube [cube]
+  (let [blue-face-location (locate-blue-face cube)
+        moves-blue (blue-face-to-left blue-face-location)
+        blue-at-left-cube (move-cube cube moves-blue)
+
+        yellow-face-location (locate-yellow-face blue-at-left-cube)
+        moves-yellow (yellow-face-to-top yellow-face-location)
+        orientated-cube (move-cube cube moves-yellow)
+        ]
+        ; [(str moves-blue moves-yellow) orientated-cube]
+        orientated-cube))
+
+; (orientate-cube XXZ-cube)
+
+;;--------- end orientate cube ----------------
+
+
+
+;;--------- place-blue-white-edge -------------
 
 ; locate blue white edge
 ;   <blue>-<white>
