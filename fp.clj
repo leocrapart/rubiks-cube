@@ -1,6 +1,7 @@
 (ns main
   (:require [clojure.data.json :as json]
-            clojure.string))
+            clojure.string
+            clojure.set))
 ; let cube = new Cube(
 ; 	{left: [[4,4,4],[4,4,4],[4,4,4]],
 ; 	 right: [[2,2,2],[2,2,2],[2,2,2]],
@@ -302,19 +303,52 @@
    :bottom "XX"   
     })
 
-(defn keep-center [face]
+(defn center [face]
   (get-in face [1 1]))
 
+; (center [[4 4 4] [4 6 4] [4 4 4]])
+
 (defn centers-of-cube [cube]
-  (map keep-center cube))
+  {:left   (center (cube :left))
+   :right  (center (cube :right))
+   :bottom (center (cube :bottom))
+   :top    (center (cube :top))
+   :front  (center (cube :front))
+   :back   (center (cube :back))})
+
+(def cube
+  {:left   [[4 4 4] [4 4 4] [4 4 4]]
+   :right  [[2 2 2] [2 2 2] [2 2 2]]
+   :bottom [[6 6 6] [6 6 6] [6 6 6]]
+   :top    [[5 5 5] [5 5 5] [5 5 5]]
+   :front  [[1 1 1] [1 1 1] [1 1 1]]
+   :back   [[3 3 3] [3 3 3] [3 3 3]]})
+
 
 (defn locate-blue-face [cube]
-  ;; centers
+  ((clojure.set/map-invert (centers-of-cube cube)) 4))
 
-  )
+(defn locate-yellow-face [cube]
+  ((clojure.set/map-invert (centers-of-cube cube)) 5))
+
+(locate-blue-face cube)
+(locate-yellow-face cube)
+(locate-yellow-face (X cube))
 
 (defn orientate-cube [cube]
+  (let [blue-face-location (locate-blue-face cube)
+        moves-blue (blue-face-to-left blue-face-location)
+        blue-at-left-cube (move-cube cube moves-blue)
+
+        yellow-face-location (locate-yellow-face blue-at-left-cube)
+        moves-yellow (yellow-face-to-top yellow-face-location)
+        orientated-cube (move-cube blue-at-left-cube moves-yellow)
+        ]
+        [(str moves-blue moves-yellow) orientated-cube]
+        )
   )
+
+(orientate-cube XXZ-cube)
 
 
 (def cube
@@ -324,6 +358,11 @@
    :top    [[5 5 5] [5 5 5] [5 5 5]]
    :front  [[1 1 1] [1 1 1] [1 1 1]]
    :back   [[3 3 3] [3 3 3] [3 3 3]]})
+
+(def XXZ-cube
+  (move-cube cube "XXZ"))
+
+; XXZ-cube
 
 (println
  (json/write-str cube))
