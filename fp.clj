@@ -1,4 +1,3 @@
-#_{:clj-kondo/ignore [:namespace-name-mismatch]}
 (ns main
   (:require [clojure.data.json :as json]
             clojure.string))
@@ -197,8 +196,7 @@
     (assoc-in [:left 2 1] (get-in cube [:back 0 1]))
     (assoc-in [:left 2 2] (get-in cube [:back 0 0]))
 
-    (assoc :bottom (clockwise-rotated (cube :bottom)))
-    )
+    (assoc :bottom (clockwise-rotated (cube :bottom)))))
 
 
 (defn D1 [cube]
@@ -222,8 +220,7 @@
     (assoc-in [:right 1 2] (get-in cube [:bottom 2 1]))
     (assoc-in [:right 2 2] (get-in cube [:bottom 2 0]))
 
-    (assoc :back (clockwise-rotated (cube :back)))
-    )
+    (assoc :back (clockwise-rotated (cube :back)))))
 
 (defn B1 [cube]
   (B (B (B cube))))
@@ -288,6 +285,36 @@
 
 (defn Z1 [cube]
   (F1 (S1 (B cube))))
+
+(def blue-face-to-left
+  {:left ""
+   :top "Z1"
+   :right "ZZ"
+   :bottom "Z"
+   :front "Y"
+   :back "Y1"    
+    })
+
+(def yellow-face-to-top
+  {:top ""
+   :front "X"
+   :back "X1"
+   :bottom "XX"   
+    })
+
+(defn keep-center [face]
+  (get-in face [1 1]))
+
+(defn centers-of-cube [cube]
+  (map keep-center cube))
+
+(defn locate-blue-face [cube]
+  ;; centers
+
+  )
+
+(defn orientate-cube [cube]
+  )
 
 
 (def cube
