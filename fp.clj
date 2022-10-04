@@ -592,10 +592,10 @@
  [:bottom 1 2] [:right 2 1]
  [:bottom 2 1] [:back 0 1]
 
- [:back 0 1] [:front 2 1]
- [:back 1 0] [:left 2 1]
- [:back 1 2] [:right 2 1]
- [:back 2 1] [:back 0 1]
+ [:back 0 1] [:bottom 2 1]
+ [:back 1 0] [:left 1 0]
+ [:back 1 2] [:right 1 2]
+ [:back 2 1] [:top 0 1]
   })
 
 ; (edge-of [:left 2 1])
@@ -603,8 +603,21 @@
 
 ; given a sticker-pos [:left 2 1] = left face down edge
 ; returns the edge color : here [:bottom 1 0] may be white
-(defn edge-color-of [sticker-pos])
+(defn edge-color-of [cube sticker-pos]
+  (get-in cube (edge-of sticker-pos)))
 
+(def cube
+  {:left   [[4 4 4] [4 4 4] [4 4 4]]
+   :right  [[2 2 2] [2 2 2] [2 2 2]]
+   :bottom [[6 6 6] [6 6 6] [6 6 6]]
+   :top    [[5 5 5] [5 5 5] [5 5 5]]
+   :front  [[1 1 1] [1 1 1] [1 1 1]]
+   :back   [[3 3 3] [3 3 3] [3 3 3]]})
+
+(edge-color-of cube [:left 0 1]) ;;5
+(edge-color-of cube [:left 1 0]) ;;3
+(edge-color-of cube [:left 1 2]) ;;1
+(edge-color-of cube [:left 2 1]) ;;6
 
 
 
