@@ -576,6 +576,26 @@
  [:front 1 0] [:left 1 2]
  [:front 1 2] [:right 1 0]
  [:front 2 1] [:bottom 0 1]
+
+ [:top 0 1] [:back 2 1]
+ [:top 1 0] [:left 0 1]
+ [:top 1 2] [:right 0 1]
+ [:top 2 1] [:front 0 1]
+
+ [:right 0 1] [:top 1 2]
+ [:right 1 0] [:front 1 2]
+ [:right 1 2] [:back 1 2]
+ [:right 2 1] [:bottom 1 2]
+
+ [:bottom 0 1] [:front 2 1]
+ [:bottom 1 0] [:left 2 1]
+ [:bottom 1 2] [:right 2 1]
+ [:bottom 2 1] [:back 0 1]
+
+ [:back 0 1] [:front 2 1]
+ [:back 1 0] [:left 2 1]
+ [:back 1 2] [:right 2 1]
+ [:back 2 1] [:back 0 1]
   })
 
 ; (edge-of [:left 2 1])
