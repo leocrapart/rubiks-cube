@@ -529,9 +529,41 @@
 
 ; locate blue white edge
 ;   <blue>-<white>
+;   :LD = left down = solved
 ;   8x2 possibles positions left-bottom left-bottom
 ; best move for each case
 
+(def blue-white-edge-solution 
+{:LD ""
+ :DL "L1F1D1"
+ :LF "L"
+ :FL "F1D1"
+ :LU "LL"
+ :UL "LF1D1"
+ :LB "L1"
+ :BL "LLF1D1"
+
+ :FU "ULL"
+ :UF "MD1"
+ :FD "D1"
+ :DF "MD"
+ :BU "M1M1D1"
+ :UB "BL1"
+ :DB "M1D1"
+ :BD "D"
+
+ :FR "FD1"
+ :RF "R1D1D1"
+ :RD "D1D1"
+ :DR "RFD1"
+ :RB "RD1D1"
+ :BR "B1D"
+ :LU "U1U1LL"
+ :UL "R1FD1"
+  })
+
+
+(+ 1 2)
 
 (def blue-white-solve 
 {:left-bottom ""
