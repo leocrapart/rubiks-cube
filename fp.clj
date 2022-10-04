@@ -1,7 +1,6 @@
 (ns main
   (:require [clojure.data.json :as json]
-            clojure.string
-            clojure.set))
+            [clojure.algo.generic.functor :as functor]))
 ; let cube = new Cube(
 ; 	{left: [[4,4,4],[4,4,4],[4,4,4]],
 ; 	 right: [[2,2,2],[2,2,2],[2,2,2]],
@@ -18,6 +17,13 @@
 ; blue 4
 ; yellow 5
 ; white 6
+
+(defn red?    [number] (= number 1))
+(defn green?  [number] (= number 2))
+(defn orange? [number] (= number 3))
+(defn blue?   [number] (= number 4))
+(defn yellow? [number] (= number 5))
+(defn white?  [number] (= number 6))
 
 (defn up [item]
   [0 0 0])
@@ -454,7 +460,7 @@
   (move-cube cube ""))
 
 
-;;--------- orientate cube ----------------------
+;;--------- orientate cube --------------------------------------------------------------------------
 ; place blue face at left, and yellow face at top
 
 (def blue-face-to-left
@@ -521,46 +527,17 @@
 
 ; (orientate-cube XXZ-cube)
 
-;;--------- end orientate cube ----------------
+;;--------- end orientate cube --------------------------------------------------------------------
 
 
 
-;;--------- place-blue-white-edge -------------
+;;--------- place-blue-white edge -----------------------------------------------------------------
 
 ; locate blue white edge
 ;   <blue>-<white>
 ;   :LD = left down = solved
 ;   8x2 possibles positions left-bottom left-bottom
 ; best move for each case
-
-(def blue-white-edge-solution 
-{:LD ""
- :DL "L1F1D1"
- :LF "L"
- :FL "F1D1"
- :LU "LL"
- :UL "LF1D1"
- :LB "L1"
- :BL "LLF1D1"
-
- :FU "ULL"
- :UF "MD1"
- :FD "D1"
- :DF "MD"
- :BU "M1M1D1"
- :UB "BL1"
- :DB "M1D1"
- :BD "D"
-
- :FR "FD1"
- :RF "R1D1D1"
- :RD "D1D1"
- :DR "RFD1"
- :RB "RD1D1"
- :BR "B1D"
- :RU "U1U1LL"
- :UR "R1FD1"
-  })
 
 ;; locate blue-white edge
 
@@ -600,6 +577,8 @@
 
 ; (edge-of [:left 2 1])
 
+(def edges (keys edge-of))
+; edges
 
 ; given a sticker-pos [:left 2 1] = left face down edge
 ; returns the edge color : here [:bottom 1 0] may be white
@@ -619,18 +598,135 @@
 (edge-color-of cube [:left 1 2]) ;;1
 (edge-color-of cube [:left 2 1]) ;;6
 
+(map (partial edge-color-of cube) edges)
+
+;; blue edges
+(def)
+(conj [:left 0 1] [4 6])
+
+(defn color-of-sticker [cube sticker]
+  (get-in cube sticker))
+
+; (color-of-sticker cube [:left 0 1])
+
+(defn edge-color-of-sticker [cube sticker]
+  [(color-of-sticker cube sticker)
+   (color-of-sticker cube (edge-of sticker))])
+
+; (edge-color-of-sticker cube [:left 0 1])
+
+(defn conj-edge-color [cube sticker]
+  (conj sticker (edge-color-of-sticker cube sticker)))
+
+; (conj-edge-color cube [:left 0 1])
+
+(defn edges-with-edge-color [cube]
+  (map (partial conj-edge-color cube) edges))
+
+; (edges-with-edge-color cube)
+
+(defn blue-white-edge? [edge-with-edge-color]
+  (= (last edge-with-edge-color) [4 6]))
+
+; (blue-white-edge? [:bottom 1 2 [4 6]])
+
+(defn blue-white-edge-blue-sticker-pos [cube]
+  (vec
+    (drop-last
+      (first
+        (filter blue-white-edge?
+          (edges-with-edge-color cube))))))
+
+; (blue-white-edge-blue-sticker-pos cube)
+
+(def face-to-letter-notation
+{:left "L"
+ :front "F"
+ :right "R"
+ :back "B"
+ :top "U"
+ :bottom "D"
+ })
+
+(defn edge-sticker-to-edge-notation [edge-sticker-1]
+  (let [edge-sticker-2 (edge-of edge-sticker-1)
+        face-1 (first edge-sticker-1)
+        face-2 (first edge-sticker-2)
+        face-1-letter (face-to-letter-notation face-1)
+        face-2-letter (face-to-letter-notation face-2)]
+    (keyword
+      (str face-1-letter face-2-letter))
+    ))
+
+; (edge-sticker-to-edge-notation [:left 0 1])
+; (edge-sticker-to-edge-notation [:back 2 1])
 
 
-(+ 1 2)
+(defn locate-blue-white-edge [cube]
+  (edge-sticker-to-edge-notation
+    (blue-white-edge-blue-sticker-pos cube)))
 
-(def blue-white-solve 
-{:left-bottom ""
- :bottom-left "L1L1 U1 F1 L"
- :left-front "L"
+; (locate-blue-white-edge cube)
+
+(def blue-white-edge-solutions
+{:LD ""
+ :DL "L1F1D1"
+ :LF "L"
+ :FL "F1D1"
+ :LU "LL"
+ :UL "LF1D1"
+ :LB "L1"
+ :BL "LLF1D1"
+
+ :FU "ULL"
+ :UF "MD1"
+ :FD "D1"
+ :DF "MD"
+ :BU "M1M1D1"
+ :UB "BL1"
+ :DB "M1D1"
+ :BD "D"
+
+ :FR "FD1"
+ :RF "R1D1D1"
+ :RD "D1D1"
+ :DR "RFD1"
+ :RB "RD1D1"
+ :BR "B1D"
+ :RU "U1U1LL"
+ :UR "R1FD1"
   })
 
+(defn blue-white-edge-solution [cube]
+  (blue-white-edge-solutions (locate-blue-white-edge cube)))
+
+; (blue-white-edge-solution cube)
+; (blue-white-edge-solution (D cube))
+; (blue-white-edge-solution (F cube))
+; (blue-white-edge-solution (move-cube cube "LLUU"))
+
+
 (defn solve-blue-white [cube]
-  )
+  (move-cube cube (blue-white-edge-solution cube)))
+
+; (solve-blue-white cube)
+; (solve-blue-white (move-cube cube "LRMUFBBLDD"))
+
+
+(defn blue-white-edge-positioned? [cube]
+  (and (blue? (color-of-sticker cube [:left 2 1]))
+       (white? (color-of-sticker cube [:bottom 1 0]))))
+
+(blue-white-edge-positioned? cube)
+
+; (blue-white-edge-positioned? 
+;   (solve-blue-white cube))
+
+; (blue-white-edge-positioned?
+;  (solve-blue-white (move-cube cube "LRMUFBBLDD")))
+
+;;--------- end place-blue-white edge -----------------------------------------------------------------
+
 
 ;;    formulas 
 
