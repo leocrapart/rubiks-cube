@@ -17,4 +17,5 @@
 .clj-kondo
 .lsp
 .calva
-target
+/target/
+/.nrepl-port

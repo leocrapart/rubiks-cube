@@ -558,9 +558,34 @@
  :DR "RFD1"
  :RB "RD1D1"
  :BR "B1D"
- :LU "U1U1LL"
- :UL "R1FD1"
+ :RU "U1U1LL"
+ :UR "R1FD1"
   })
+
+;; locate blue-white edge
+
+;; returns the edge-of the given edge.
+;; given [:left 2 1], returns [:bottom 1 0]
+(def edge-of 
+{[:left 0 1] [:top 1 0]
+ [:left 1 0] [:back 1 0]
+ [:left 1 2] [:front 1 0]
+ [:left 2 1] [:bottom 1 0]
+
+ [:front 0 1] [:top 2 1]
+ [:front 1 0] [:left 1 2]
+ [:front 1 2] [:right 1 0]
+ [:front 2 1] [:bottom 0 1]
+  })
+
+; (edge-of [:left 2 1])
+
+
+; given a sticker-pos [:left 2 1] = left face down edge
+; returns the edge color : here [:bottom 1 0] may be white
+(defn edge-color-of [sticker-pos])
+
+
 
 
 (+ 1 2)
