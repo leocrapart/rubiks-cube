@@ -531,7 +531,7 @@
 
 
 
-;;--------- place-blue-white edge -----------------------------------------------------------------
+;;--------- solve blue-white edge -----------------------------------------------------------------
 
 ; locate blue white edge
 ;   <blue>-<white>
@@ -725,9 +725,9 @@
 ; (blue-white-edge-positioned?
 ;  (solve-blue-white (move-cube cube "LRMUFBBLDD")))
 
-;;--------- end place-blue-white edge -----------------------------------------------------------------
+;;--------- end solve blue-white edge -----------------------------------------------------------------
 
-;;--------- blue-red-white pair  -----------------------------------------------------------------
+;;--------- solve blue-red-white pair  -----------------------------------------------------------------
 
 ;; locate blue-red edge
 ;; place blue-red edge on buffer
@@ -740,6 +740,9 @@
 ;; create blue-red-white pair 
 
 ;; place blue-red-white pair 
+
+;;--------- end solve blue-red-white pair  -----------------------------------------------------------------
+
 
 ;;    formulas 
 
