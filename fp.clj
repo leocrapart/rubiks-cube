@@ -727,6 +727,19 @@
 
 ;;--------- end place-blue-white edge -----------------------------------------------------------------
 
+;;--------- blue-red-white pair  -----------------------------------------------------------------
+
+;; locate blue-red edge
+;; place blue-red edge on buffer
+
+;; locate blue-red-white corner
+;; place blue-red-white corner on top
+;; de-orientate blue-red-white corner (not white on top)
+
+;; pair blue-red edge with blue-red-white corner
+;; create blue-red-white pair 
+
+;; place blue-red-white pair 
 
 ;;    formulas 
 
