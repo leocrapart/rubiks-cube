@@ -922,8 +922,7 @@
 ; (nine-yellow? cube-with-blue-red-at-UL)
 ; (nine-white? cube-with-blue-red-at-UL)
 
-
-(defn possible-cube? [cube]
+(defn nine-stickers-of-each-color? [cube]
   (and (nine-blue? cube)
     (nine-red? cube)
     (nine-green? cube)
@@ -931,6 +930,19 @@
     (nine-yellow? cube)
     (nine-white? cube)))
 
+(defn possible-cube? [cube]
+  (nine-stickers-of-each-color? cube))
+
+(def impossible-cube-1-white-sticker-painted-yellow
+  {:left   [[1 1 2] [2 4 3] [4 4 4]]
+   :right  [[2 5 3] [1 2 1] [6 3 5]]
+   :bottom [[6 3 2] [6 6 5] [6 5 2]]
+   :top    [[5 6 5] [4 5 1] [6 5 5]]
+   :front  [[1 4 1] [4 1 2] [1 2 3]]
+   :back   [[3 2 3] [6 3 5] [4 3 4]]}) ;; the [1 2] is yellow (5) but should be white (6)
+
+(possible-cube? cube-with-blue-red-at-UL)                        ;; => true
+(possible-cube? impossible-cube-1-white-sticker-painted-yellow)  ;; => false
 
 
 (not false)
