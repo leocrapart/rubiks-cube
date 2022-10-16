@@ -730,6 +730,43 @@
 ;;--------- solve blue-red-white pair  -----------------------------------------------------------------
 
 ;; locate blue-red edge
+
+(defn edges [cube]
+{:LD [(get-in cube [:left 2 1]) (get-in cube [:bottom 1 0])]
+ :LF [(get-in cube [:left 1 2]) (get-in cube [:front 1 0])]
+ :LU [(get-in cube [:left 0 1]) (get-in cube [:top 1 0])]
+ :LB [(get-in cube [:left 1 0]) (get-in cube [:back 1 0])]
+
+ :FD [(get-in cube [:front 2 1]) (get-in cube [:bottom 0 1])]
+ :FU [(get-in cube [:front 0 1]) (get-in cube [:top 2 1])]
+ :UB [(get-in cube [:top 0 1]) (get-in cube [:back 2 1])]
+ :BD [(get-in cube [:back 0 1]) (get-in cube [:bottom 2 1])]
+
+ :RF [(get-in cube [:right 1 0]) (get-in cube [:front 1 2])]
+ :RD [(get-in cube [:right 2 1]) (get-in cube [:bottom 1 2])]
+ :RB [(get-in cube [:right 1 2]) (get-in cube [:back 1 2])]
+ :RU [(get-in cube [:right 0 1]) (get-in cube [:top 1 2])]
+  })
+
+(defn find-edge [cube edge-color]
+  (let [edges (edges cube)
+        edge-pos]
+    ))
+
+(def cube-with-blue-red-at-UL
+  {:left   [[1 1 2] [2 4 3] [4 4 4]]
+   :right  [[2 5 3] [1 2 1] [6 3 5]]
+   :bottom [[6 3 2] [6 6 5] [6 5 2]]
+   :top    [[5 6 5] [4 5 1] [6 5 5]]
+   :front  [[1 4 1] [4 1 2] [1 2 3]]
+   :back   [[3 2 3] [5 3 5] [4 3 4]]})
+
+;; (:LD (edges cube-with-blue-red-at-UL))
+
+;; (find-edge cube-with-blue-red-at-UL "blue-red") ;; => :UL
+
+
+
 ;; place blue-red edge on buffer
 
 ;; locate blue-red-white corner
