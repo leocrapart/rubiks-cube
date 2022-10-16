@@ -753,16 +753,67 @@
         edge-pos]
     ))
 
+
+
+(defn count-blue-row [row]
+  (count (filter blue? row)))
+
+; (filter blue? [1 1 2])
+; (filter blue? [2 4 3])
+; (filter blue? [4 4 4])
+; (count (filter blue? [2 4 3]))
+; (count-blue-row [2 4 3])
+; (count-blue-row [4 4 4])
+
+(defn count-blue-face [face]
+  (+ (count-blue-row (first face))
+    (count-blue-row (second face))
+    (count-blue-row (last face))
+    ))
+
+; (first [[1 1 2] [2 4 3] [4 4 4]])
+; (second [[1 1 2] [2 4 3] [4 4 4]])
+; (last [[1 1 2] [2 4 3] [4 4 4]])
+; (count-blue-face [[1 1 2] [2 4 3] [4 4 4]])
+; (count-blue-face [[2 5 3] [1 2 1] [6 3 5]])
+; (count-blue-face [[1 4 1] [4 1 2] [1 2 3]])
+
+
+(defn count-blue-cube [cube]
+  (+ (count-blue-face (cube :left))
+    (count-blue-face (cube :right))
+    (count-blue-face (cube :bottom))
+    (count-blue-face (cube :top))
+    (count-blue-face (cube :front))
+    (count-blue-face (cube :back))
+    ))
+
+
 (def cube-with-blue-red-at-UL
   {:left   [[1 1 2] [2 4 3] [4 4 4]]
    :right  [[2 5 3] [1 2 1] [6 3 5]]
    :bottom [[6 3 2] [6 6 5] [6 5 2]]
    :top    [[5 6 5] [4 5 1] [6 5 5]]
    :front  [[1 4 1] [4 1 2] [1 2 3]]
-   :back   [[3 2 3] [5 3 5] [4 3 4]]})
+   :back   [[3 2 3] [6 3 6] [4 3 4]]})
+
+
+; (count-blue-cube cube-with-blue-red-at-UL)
+
+(defn nine-blue? [cube]
+  (= 9 (count-blue-cube cube)))
+
+; (nine-blue? cube-with-blue-red-at-UL)
+
+(defn possible-cube? [cube]
+  ())
+
+
+
+(not false)
 
 ;; (:LD (edges cube-with-blue-red-at-UL))
-
+(edges cube-with-blue-red-at-UL)
 ;; (find-edge cube-with-blue-red-at-UL "blue-red") ;; => :UL
 
 
