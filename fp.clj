@@ -767,6 +767,9 @@
 (defn count-orange-row [row]
   (count (filter orange? row)))
 
+(defn count-yellow-row [row]
+  (count (filter yellow? row)))
+
 ; (filter blue? [1 1 2])
 ; (filter blue? [2 4 3])
 ; (filter blue? [4 4 4])
@@ -797,6 +800,13 @@
     (count-orange-row (second face))
     (count-orange-row (last face))
     ))
+
+(defn count-yellow-face [face]
+  (+ (count-yellow-row (first face))
+    (count-yellow-row (second face))
+    (count-yellow-row (last face))
+    ))
+
 
 
 ; (first [[1 1 2] [2 4 3] [4 4 4]])
@@ -844,7 +854,14 @@
     (count-orange-face (cube :back))
     ))
 
-
+(defn count-yellow-cube [cube]
+  (+ (count-yellow-face (cube :left))
+    (count-yellow-face (cube :right))
+    (count-yellow-face (cube :bottom))
+    (count-yellow-face (cube :top))
+    (count-yellow-face (cube :front))
+    (count-yellow-face (cube :back))
+    ))
 
 (def cube-with-blue-red-at-UL
   {:left   [[1 1 2] [2 4 3] [4 4 4]]
@@ -859,6 +876,7 @@
 ; (count-red-cube cube-with-blue-red-at-UL)
 ; (count-green-cube cube-with-blue-red-at-UL)
 ; (count-orange-cube cube-with-blue-red-at-UL)
+; (count-yellow-cube cube-with-blue-red-at-UL)
 
 (defn nine-blue? [cube]
   (= 9 (count-blue-cube cube)))
@@ -882,6 +900,7 @@
 ; (nine-red? cube-with-blue-red-at-UL)
 ; (nine-green? cube-with-blue-red-at-UL)
 ; (nine-orange? cube-with-blue-red-at-UL)
+; (nine-yellow? cube-with-blue-red-at-UL)
 
 
 (defn possible-cube? [cube]
