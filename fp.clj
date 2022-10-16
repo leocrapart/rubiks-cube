@@ -1,6 +1,14 @@
 (ns main
   (:require [clojure.data.json :as json]
             [clojure.algo.generic.functor :as functor]))
+
+; Plan 
+; orientate cube
+; solve blue-white edge
+; solve blue-red-white pair
+; possible-cube?
+; formulas
+
 ; let cube = new Cube(
 ; 	{left: [[4,4,4],[4,4,4],[4,4,4]],
 ; 	 right: [[2,2,2],[2,2,2],[2,2,2]],
@@ -530,7 +538,6 @@
 ;;--------- end orientate cube --------------------------------------------------------------------
 
 
-
 ;;--------- solve blue-white edge -----------------------------------------------------------------
 
 ; locate blue white edge
@@ -753,7 +760,26 @@
         edge-pos]
     ))
 
+;; (:LD (edges cube-with-blue-red-at-UL))
+(edges cube-with-blue-red-at-UL)
+;; (find-edge cube-with-blue-red-at-UL "blue-red") ;; => :UL
 
+
+
+;; place blue-red edge on buffer
+
+;; locate blue-red-white corner
+;; place blue-red-white corner on top
+;; de-orientate blue-red-white corner (not white on top)
+
+;; pair blue-red edge with blue-red-white corner
+;; create blue-red-white pair 
+
+;; place blue-red-white pair 
+
+;;--------- end solve blue-red-white pair  -----------------------------------------------------------------
+
+;;--------- possible-cube?  -----------------------------------------------------------------
 
 (defn count-blue-row [row]
   (count (filter blue? row)))
@@ -941,39 +967,20 @@
    :front  [[1 4 1] [4 1 2] [1 2 3]]
    :back   [[3 2 3] [6 3 5] [4 3 4]]}) ;; the [1 2] is yellow (5) but should be white (6)
 
-(possible-cube? cube-with-blue-red-at-UL)                        ;; => true
-(possible-cube? impossible-cube-1-white-sticker-painted-yellow)  ;; => false
+; (possible-cube? cube-with-blue-red-at-UL)                        ;; => true
+; (possible-cube? impossible-cube-1-white-sticker-painted-yellow)  ;; => false
 
+;;--------- end possible-cube?  -----------------------------------------------------------------
 
-(not false)
-
-;; (:LD (edges cube-with-blue-red-at-UL))
-(edges cube-with-blue-red-at-UL)
-;; (find-edge cube-with-blue-red-at-UL "blue-red") ;; => :UL
-
-
-
-;; place blue-red edge on buffer
-
-;; locate blue-red-white corner
-;; place blue-red-white corner on top
-;; de-orientate blue-red-white corner (not white on top)
-
-;; pair blue-red edge with blue-red-white corner
-;; create blue-red-white pair 
-
-;; place blue-red-white pair 
-
-;;--------- end solve blue-red-white pair  -----------------------------------------------------------------
-
-
-;;    formulas 
+;;--------- formulas  -----------------------------------------------------------------
 
 (defn t-perm [cube]
   (move-cube cube "R U R' U' R' F RR U' R' U' R U R' F'"))
 
 (defn y-perm [cube]
   (move-cube cube "F R U' R' U' R U R' F' R U R' U' R' F R F'"))
+
+;;--------- end formulas  -----------------------------------------------------------------
 
 
 (defn to-json [cube]
