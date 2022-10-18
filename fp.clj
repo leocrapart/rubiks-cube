@@ -746,27 +746,76 @@
 
  :FD [(get-in cube [:front 2 1]) (get-in cube [:bottom 0 1])]
  :FU [(get-in cube [:front 0 1]) (get-in cube [:top 2 1])]
- :UB [(get-in cube [:top 0 1]) (get-in cube [:back 2 1])]
- :BD [(get-in cube [:back 0 1]) (get-in cube [:bottom 2 1])]
+ :UB [(get-in cube [:top 0 1])   (get-in cube [:back 2 1])]
+ :BD [(get-in cube [:back 0 1])  (get-in cube [:bottom 2 1])]
 
  :RF [(get-in cube [:right 1 0]) (get-in cube [:front 1 2])]
  :RD [(get-in cube [:right 2 1]) (get-in cube [:bottom 1 2])]
  :RB [(get-in cube [:right 1 2]) (get-in cube [:back 1 2])]
  :RU [(get-in cube [:right 0 1]) (get-in cube [:top 1 2])]
+
+ ;; inverted ones
+ :DL [(get-in cube [:bottom 1 0]) (get-in cube [:left 2 1]) ]
+ :FL [(get-in cube [:front 1 0])  (get-in cube [:left 1 2]) ]
+ :UL [(get-in cube [:top 1 0])    (get-in cube [:left 0 1]) ]
+ :BL [(get-in cube [:back 1 0])   (get-in cube [:left 1 0]) ]
+
+ :DF [(get-in cube [:bottom 0 1]) (get-in cube [:front 2 1])]
+ :UF [(get-in cube [:top 2 1])    (get-in cube [:front 0 1])]
+ :BU [(get-in cube [:back 2 1])   (get-in cube [:top 0 1])  ]
+ :DB [(get-in cube [:bottom 2 1]) (get-in cube [:back 0 1]) ]
+
+ :FR [(get-in cube [:front 1 2])  (get-in cube [:right 1 0])]
+ :DR [(get-in cube [:bottom 1 2]) (get-in cube [:right 2 1])]
+ :BR [(get-in cube [:back 1 2])   (get-in cube [:right 1 2])]
+ :UR [(get-in cube [:top 1 2])    (get-in cube [:right 0 1])]
   })
 
+(defn color-to-number [color]
+  ({"red" 1
+    "green" 2
+    "orange" 3
+    "blue" 4
+    "yellow" 5
+    "white" 6} 
+    color))
+
+; (color-to-number "red")
+
+(defn edge-color-to-edge [edge-color]
+  (let [colors (clojure.string/split edge-color #"-")
+        colors-numbers (map color-to-number colors)]
+    (vec colors-numbers)))
+
+; (clojure.string/split "blue-red" #"-")
+; (map color-to-number ["blue" "red"])
+
 (defn find-edge [cube edge-color]
-  (let [edges (edges cube)
-        edge-pos]
-    ))
+  (let [edge (edge-color-to-edge edge-color)
+        edges (edges cube)
+        edge-pos ((clojure.set/map-invert edges) edge)]
+    edge-pos))
 
 ;; (:LD (edges cube-with-blue-red-at-UL))
-(edges cube-with-blue-red-at-UL)
-;; (find-edge cube-with-blue-red-at-UL "blue-red") ;; => :UL
+; (edges cube-with-blue-red-at-UL)
+; (clojure.set/map-invert (edges cube-with-blue-red-at-UL))
+; (find-edge cube-with-blue-red-at-UL "blue-red")     ;; => :UL
+; (find-edge cube-with-blue-red-at-UL "blue-white")   ;; => :LD
+; (find-edge cube-with-blue-red-at-UL "blue-yellow")  ;; => :FU
+; (find-edge cube-with-blue-red-at-UL "blue-orange")  ;; => :FL
+; (find-edge cube-with-blue-red-at-UL "green-white")  ;; => :LB
+; (find-edge cube-with-blue-red-at-UL "green-red")    ;; => :FR
+; (find-edge cube-with-blue-red-at-UL "green-orange") ;; => :FD
+; (find-edge cube-with-blue-red-at-UL "green-yellow") ;; => :BD
+; (find-edge cube-with-blue-red-at-UL "red-yellow")   ;; => :UR
 
 
 
 ;; place blue-red edge on buffer
+
+;;all cases, and then move to buffer
+
+
 
 ;; locate blue-red-white corner
 ;; place blue-red-white corner on top
