@@ -813,6 +813,15 @@
 
 ;; place blue-red edge on buffer
 
+(defn blue-red-edge-to-buffer-solution [blue-red-edge-pos])
+
+(defn place-blue-red-edge-on-buffer [cube ]
+  (let [blue-red-edge-pos (find-edge cube "blue-red")
+        moves (blue-red-edge-to-buffer-solution blue-red-edge-pos)]
+    (move-cube cube moves)))
+
+
+
 ;;all cases, and then move to buffer
 
 
