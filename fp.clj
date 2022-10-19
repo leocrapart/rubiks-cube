@@ -813,7 +813,38 @@
 
 ;; place blue-red edge on buffer
 
-(defn blue-red-edge-to-buffer-solution [blue-red-edge-pos])
+(def blue-red-edge-to-buffer-solution
+  {; :LD 
+   :LF "F1"
+   :LU "U1M"
+   :LB "BM1"
+
+   :FD ""
+   :FU "M"
+   :UB "M1M1"
+   :BD "M1"
+
+   :RF "F"
+   :RD "RF"
+   :RB "RRF"
+   :RU "UM"
+
+   ;; inverted ones
+   ; :DL
+   :FL "F1"
+   :UL "U1M"
+   :BL "BM1"
+
+   :DF ""
+   :UF "M"
+   :BU "M1M1"
+   :DB "M1"
+
+   :FR "F"
+   :DR "RF"
+   :BR "RRF"
+   :UR "UM"
+   })
 
 (defn place-blue-red-edge-on-buffer [cube ]
   (let [blue-red-edge-pos (find-edge cube "blue-red")
