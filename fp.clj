@@ -852,12 +852,39 @@
     (move-cube cube moves)))
 
 
-
-;;all cases, and then move to buffer
-
-
-
 ;; locate blue-red-white corner
+
+;; find-corner
+
+; (defn corners [cube]
+;   {; top corners
+;    :UFL
+;    :ULB
+;    :UBR
+;    :URF
+
+
+;    ; bottom corners
+;    :FDL
+;    :LDB
+;    :BDR
+;    :RDF
+;    })
+
+(defn find-corner [cube corner-color])
+
+
+(def cube
+  {:left   [[4 4 4] [4 4 4] [4 4 4]]
+   :right  [[2 2 2] [2 2 2] [2 2 2]]
+   :bottom [[6 6 6] [6 6 6] [6 6 6]]
+   :top    [[5 5 5] [5 5 5] [5 5 5]]
+   :front  [[1 1 1] [1 1 1] [1 1 1]]
+   :back   [[3 3 3] [3 3 3] [3 3 3]]})
+
+(find-corner cube "yellow-red-blue") ; => :UFL
+(find-corner cube "yellow-green-red") ; => :URF
+
 ;; place blue-red-white corner on top
 ;; de-orientate blue-red-white corner (not white on top)
 
