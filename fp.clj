@@ -869,6 +869,33 @@
 ;    :LDB
 ;    :BDR
 ;    :RDF
+;    
+;    ; top corners +1
+;    :FLU
+;    :LBU
+;    :BRU
+;    :RFU
+;
+;    ; top corners +2
+;    :LUF
+;    :BUL
+;    :RUB
+;    :FUR
+;
+;    ; bottom corners +1
+;    :DLF
+;    :DBL
+;    :DRB
+;    :DFR
+;
+;    ; bottom corners +2
+;    :LFD
+;    :BLD
+;    :RBD
+;    :FRD
+
+
+
 ;    })
 
 (defn find-corner [cube corner-color])
