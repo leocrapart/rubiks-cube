@@ -858,7 +858,7 @@
 
 ; (defn corners [cube]
 ;   {; top corners
-;    :UFL [(get-in cube [:top 2 0])]
+;    :UFL [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
 ;    :ULB
 ;    :UBR
 ;    :URF
