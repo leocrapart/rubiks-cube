@@ -856,47 +856,45 @@
 
 ;; find-corner
 
-; (defn corners [cube]
-;   {; top corners
-;    :UFL [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
-;    :ULB
-;    :UBR
-;    :URF
+(defn corners [cube]
+  {; top corners
+   :UFL [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   :ULB [(get-in cube [:top 0 0]) (get-in cube [:left 0 0]) (get-in cube [:back 2 0])]
+   :UBR [(get-in cube [:top 0 2]) (get-in cube [:back 2 2]) (get-in cube [:right 0 2])]
+   :URF [(get-in cube [:top 2 2]) (get-in cube [:right 0 0]) (get-in cube [:front 0 2])]
 
+   ; top corners +1
+   :FLU [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   :LBU [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   :BRU [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   :RFU [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
 
-;    ; bottom corners
-;    :FDL
-;    :LDB
-;    :BDR
-;    :RDF
-;    
-;    ; top corners +1
-;    :FLU
-;    :LBU
-;    :BRU
-;    :RFU
-;
-;    ; top corners +2
-;    :LUF
-;    :BUL
-;    :RUB
-;    :FUR
-;
-;    ; bottom corners +1
-;    :DLF
-;    :DBL
-;    :DRB
-;    :DFR
-;
-;    ; bottom corners +2
-;    :LFD
-;    :BLD
-;    :RBD
-;    :FRD
+   ; top corners +2
+   :LUF [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   :BUL [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   :RUB [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   :FUR [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
 
 
 
-;    })
+   ; bottom corners
+   :FDL [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   :LDB [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   :BDR [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   :RDF [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+
+   ; bottom corners +1
+   :DLF [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   :DBL [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   :DRB [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   :DFR [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+
+   ; bottom corners +2
+   :LFD [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   :BLD [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   :RBD [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   :FRD [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   })
 
 (defn find-corner [cube corner-color])
 
