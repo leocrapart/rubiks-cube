@@ -309,58 +309,7 @@
    :top    [[5 5 5] [5 5 5] [5 5 5]]
    :front  [[1 1 1] [1 1 1] [1 1 1]]
    :back   [[3 3 3] [3 3 3] [3 3 3]]})
-
-(def XXZ-cube
-  (move-cube cube "XXZ"))
-
-; XXZ-cube
-
-(println
- (json/write-str cube))
-
-
-(R cube)
-((R cube) :front)
-((R (R cube)) :front)
-((R1 cube) :front)
-
-(L cube)
-((L cube) :front)
-((L (L cube)) :front)
-((L1 cube) :front)
-
-(U cube)
-((U cube) :front)
-((U (U cube)) :front)
-((U1 cube) :front)
-
-(F cube)
-((F cube) :front)
-((F (F cube)) :front)
-((F1 cube) :front)
-
-((F cube) :top)
-((F (F cube)) :top)
-
-(M cube)
-((M cube) :front)
-((M (M cube)) :front)
-((M1 cube) :front)
-
-; front face get multicolor 1 2 3 4 5 6 7 8 9
-(def front-face-multicolor-cube
-  {:left   [[4 4 4] [4 4 4] [4 4 4]]
-   :right  [[2 2 2] [2 2 2] [2 2 2]]
-   :bottom [[6 6 6] [6 6 6] [6 6 6]]
-   :top    [[5 5 5] [5 5 5] [5 5 5]]
-   :front  [[1 2 3] [4 5 6] [7 8 9]]
-   :back   [[3 3 3] [3 3 3] [3 3 3]]})
-
-((F1 front-face-multicolor-cube) :front)
-; should be [[3 6 9] [2 5 8] [1 4 7]]
-(assert
- (= ((F1 front-face-multicolor-cube) :front) [[3 6 9] [2 5 8] [1 4 7]]))
-
+;;; move-cube
 
 ;;process parse-string                 v
 ;   "RRU'" ;; moves-str
@@ -466,6 +415,63 @@
 (comment
   (move-cube cube "RRU")
   (move-cube cube ""))
+
+;;;--- end move-cube
+
+
+
+(def XXZ-cube
+  (move-cube cube "XXZ"))
+
+; XXZ-cube
+
+(println
+ (json/write-str cube))
+
+
+(R cube)
+((R cube) :front)
+((R (R cube)) :front)
+((R1 cube) :front)
+
+(L cube)
+((L cube) :front)
+((L (L cube)) :front)
+((L1 cube) :front)
+
+(U cube)
+((U cube) :front)
+((U (U cube)) :front)
+((U1 cube) :front)
+
+(F cube)
+((F cube) :front)
+((F (F cube)) :front)
+((F1 cube) :front)
+
+((F cube) :top)
+((F (F cube)) :top)
+
+(M cube)
+((M cube) :front)
+((M (M cube)) :front)
+((M1 cube) :front)
+
+; front face get multicolor 1 2 3 4 5 6 7 8 9
+(def front-face-multicolor-cube
+  {:left   [[4 4 4] [4 4 4] [4 4 4]]
+   :right  [[2 2 2] [2 2 2] [2 2 2]]
+   :bottom [[6 6 6] [6 6 6] [6 6 6]]
+   :top    [[5 5 5] [5 5 5] [5 5 5]]
+   :front  [[1 2 3] [4 5 6] [7 8 9]]
+   :back   [[3 3 3] [3 3 3] [3 3 3]]})
+
+((F1 front-face-multicolor-cube) :front)
+; should be [[3 6 9] [2 5 8] [1 4 7]]
+(assert
+ (= ((F1 front-face-multicolor-cube) :front) [[3 6 9] [2 5 8] [1 4 7]]))
+
+
 
 
 ;;--------- orientate cube --------------------------------------------------------------------------
@@ -608,8 +614,6 @@
 (map (partial edge-color-of cube) edges)
 
 ;; blue edges
-(def)
-(conj [:left 0 1] [4 6])
 
 (defn color-of-sticker [cube sticker]
   (get-in cube sticker))
@@ -896,7 +900,23 @@
    :FRD [(get-in cube [:front 2 2]) (get-in cube [:right 2 0]) (get-in cube [:bottom 0 2])]
    })
 
-(defn find-corner [cube corner-color])
+(defn corner-color-to-corner [corner-color]
+  (let [colors (clojure.string/split corner-color #"-")
+        colors-numbers (map color-to-number colors)]
+    (vec colors-numbers)))
+
+
+(defn find-corner [cube corner-color]
+  (let [corner (corner-color-to-corner corner-color)
+        corners (corners cube)
+        corner-pos ((clojure.set/map-invert corners) corner)]
+    corner-pos))
+
+(defn find-edge [cube edge-color]
+  (let [edge (edge-color-to-edge edge-color)
+        edges (edges cube)
+        edge-pos ((clojure.set/map-invert edges) edge)]
+    edge-pos))
 
 
 (def cube
