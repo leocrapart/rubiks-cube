@@ -864,36 +864,36 @@
    :URF [(get-in cube [:top 2 2]) (get-in cube [:right 0 0]) (get-in cube [:front 0 2])]
 
    ; top corners +1
-   :FLU [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
-   :LBU [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
-   :BRU [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
-   :RFU [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   :FLU [(get-in cube [:front 0 0]) (get-in cube [:left 0 2]) (get-in cube [:top 2 0])]
+   :LBU [(get-in cube [:left 0 0]) (get-in cube [:back 2 0]) (get-in cube [:top 0 0])]
+   :BRU [(get-in cube [:back 2 2]) (get-in cube [:right 0 2]) (get-in cube [:top 0 0])]
+   :RFU [(get-in cube [:right 0 0]) (get-in cube [:front 0 2]) (get-in cube [:top 2 2])]
 
    ; top corners +2
-   :LUF [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
-   :BUL [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
-   :RUB [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
-   :FUR [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   :LUF [(get-in cube [:left 0 2]) (get-in cube [:top 2 0]) (get-in cube [:front 0 0])]
+   :BUL [(get-in cube [:back 2 0]) (get-in cube [:top 0 0]) (get-in cube [:left 0 0])]
+   :RUB [(get-in cube [:right 0 2]) (get-in cube [:top 0 0]) (get-in cube [:back 2 2])]
+   :FUR [(get-in cube [:front 0 2]) (get-in cube [:top 2 2]) (get-in cube [:right 0 0])]
 
 
 
    ; bottom corners
-   :FDL [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
-   :LDB [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
-   :BDR [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
-   :RDF [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   :FDL [(get-in cube [:front 2 0]) (get-in cube [:bottom 0 0]) (get-in cube [:left 2 2])]
+   :LDB [(get-in cube [:left 2 0]) (get-in cube [:botton 2 0]) (get-in cube [:back 0 0])]
+   :BDR [(get-in cube [:back 0 2]) (get-in cube [:bottom 2 2]) (get-in cube [:right 2 2])]
+   :RDF [(get-in cube [:right 2 0]) (get-in cube [:bottom 0 2]) (get-in cube [:front 2 2])]
 
    ; bottom corners +1
-   :DLF [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
-   :DBL [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
-   :DRB [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
-   :DFR [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   :DLF [(get-in cube [:bottom 0 0]) (get-in cube [:left 2 2]) (get-in cube [:front 2 0])]
+   :DBL [(get-in cube [:bottom 2 0]) (get-in cube [:back 0 0]) (get-in cube [:left 2 0])]
+   :DRB [(get-in cube [:bottom 2 2]) (get-in cube [:right 2 2]) (get-in cube [:back 0 2])]
+   :DFR [(get-in cube [:bottom 0 2]) (get-in cube [:front 2 2]) (get-in cube [:right 2 0])]
 
    ; bottom corners +2
-   :LFD [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
-   :BLD [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
-   :RBD [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
-   :FRD [(get-in cube [:top 2 0]) (get-in cube [:front 0 0]) (get-in cube [:left 0 2])]
+   :LFD [(get-in cube [:left 2 2]) (get-in cube [:front 2 0]) (get-in cube [:bottom 0 0])]
+   :BLD [(get-in cube [:back 0 0]) (get-in cube [:left 2 0]) (get-in cube [:bottom 2 0])]
+   :RBD [(get-in cube [:right 2 2]) (get-in cube [:back 0 2]) (get-in cube [:bottom 2 2])]
+   :FRD [(get-in cube [:front 2 2]) (get-in cube [:right 2 0]) (get-in cube [:bottom 0 2])]
    })
 
 (defn find-corner [cube corner-color])
