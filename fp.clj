@@ -856,7 +856,6 @@
     (move-cube cube moves)))
 
 
-;; locate blue-red-white corner
 
 ;; find-corner
 
@@ -930,7 +929,50 @@
 (find-corner cube "yellow-red-blue") ; => :UFL
 (find-corner cube "yellow-green-red") ; => :URF
 
+
+;; end find-corner
+;; locate blue-red-white corner
+
+(find-corner cube "blue-red-white")
+
 ;; place blue-red-white corner on top
+
+(def blue-red-white-corner-to-top-solution 
+{ ; top corners (already on top)
+  :UFL ""
+  :ULB ""
+  :UBR ""
+  :URF ""
+  ; top corners +1 (white on top)
+  :FLU "U1U1R1U"
+  :LBU "UR1U"
+  :BRU "R1U"
+  :RFU "R"
+  ; top corners +2 (already on top)
+  :LUF ""
+  :BUL ""
+  :RUB ""
+  :FUR ""
+  ;; wip
+  ; bottom corners
+  :FDL 
+  :LDB
+  :BDR
+  :RDF
+  ; bottom corners +1
+  :DLF 
+  :DBL
+  :DRB
+  :DFR
+  ; bottom corners +2
+  :LFD 
+  :BLD
+  :RBD
+  :FRD
+
+   })
+
+
 ;; de-orientate blue-red-white corner (not white on top)
 
 ;; pair blue-red edge with blue-red-white corner
