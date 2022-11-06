@@ -955,17 +955,17 @@
   :FUR ""
   ;; wip
   ; bottom corners
-  :FDL 
+  :FDL "L1U1L"
   :LDB
   :BDR
   :RDF
   ; bottom corners +1
-  :DLF 
+  :DLF "L1U1LU1R1U"
   :DBL
   :DRB
   :DFR
   ; bottom corners +2
-  :LFD 
+  :LFD "L1U1L"
   :BLD
   :RBD
   :FRD
