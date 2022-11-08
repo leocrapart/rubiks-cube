@@ -957,17 +957,17 @@
   ; bottom corners
   :FDL "L1U1L"
   :LDB "LU1U1L1U1R1U"
-  :BDR
+  :BDR "R1"
   :RDF
   ; bottom corners +1
   :DLF "L1U1LU1R1U"
   :DBL "LU1U1L1"
-  :DRB
+  :DRB "R1R1U"
   :DFR
   ; bottom corners +2
   :LFD "L1U1L"
   :BLD "LU1U1L1"
-  :RBD
+  :RBD "R1"
   :FRD
 
    })
