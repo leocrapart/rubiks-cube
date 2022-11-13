@@ -969,13 +969,16 @@
   :BLD "LU1U1L1"
   :RBD "R1"
   :FRD "R"
-
-   })
+  })
 
 
 ;; de-orientate blue-red-white corner (not white on top)
+; already done
 
 ;; pair blue-red edge with blue-red-white corner
+
+; combination of the edge color in front, and location of the other blue-red-white corner
+
 ;; create blue-red-white pair 
 
 ;; place blue-red-white pair 
