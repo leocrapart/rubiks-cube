@@ -94,6 +94,7 @@
 
       (assoc :right (clockwise-rotated (cube :right)))))
 
+
 (defn R1 [cube]
   (R (R (R cube))))
 
@@ -535,9 +536,9 @@
         yellow-face-location (locate-yellow-face blue-at-left-cube)
         moves-yellow (yellow-face-to-top yellow-face-location)
         orientated-cube (move-cube cube moves-yellow)
+        moves (str moves-blue moves-yellow)
         ]
-        ; [(str moves-blue moves-yellow) orientated-cube]
-        orientated-cube))
+        [orientated-cube moves]))
 
 ; (orientate-cube XXZ-cube)
 
@@ -717,11 +718,12 @@
 ; (blue-white-edge-solution (move-cube cube "LLUU"))
 
 
-(defn solve-blue-white [cube]
-  (move-cube cube (blue-white-edge-solution cube)))
+(defn solve-blue-white-edge [cube]
+  (let [moves (blue-white-edge-solution cube)]
+    [(move-cube cube moves) moves]))
 
-; (solve-blue-white cube)
-; (solve-blue-white (move-cube cube "LRMUFBBLDD"))
+; (solve-blue-white-edge cube)
+; (solve-blue-white-edge (move-cube cube "LRMUFBBLDD"))
 
 
 (defn blue-white-edge-positioned? [cube]
@@ -850,10 +852,10 @@
    :UR "UM"
    })
 
-(defn place-blue-red-edge-on-buffer [cube ]
+(defn place-blue-red-edge-on-buffer [cube]
   (let [blue-red-edge-pos (find-edge cube "blue-red")
         moves (blue-red-edge-to-buffer-solution blue-red-edge-pos)]
-    (move-cube cube moves)))
+    [(move-cube cube moves) moves]))
 
 
 
@@ -1209,7 +1211,14 @@ cube
 (to-json (move-cube cube "R'UU"))
 
 
-
+;; string of the moves, separated
+(defn solution [cube]
+{:orientation
+ :blue-white-edge
+ :blue-red-corner-to-buffer
+ :blue-red-white-corner-to-top
+ :blue-red-pairing
+ :blue-red-positioning})
 
 ;; next
 ;; playable cube : reframe with moves button and see cube state changed
