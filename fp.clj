@@ -1220,6 +1220,15 @@ cube
  :blue-red-pairing
  :blue-red-positioning})
 
+;;mvp
+; 2d patron rubiks cube
+; can move with R U B ... buttons
+; solve button => gives full string with spaces to separate sequences (orientation, blue-white-edge, ...)
+; < > buttons to play the solution
+; autosolve with play button (1s delay between moves)
+; pause button
+; published on vercel, site in top of readme of github project
+
 ;; next
 ;; playable cube : reframe with moves button and see cube state changed
 ;; 3d cube
